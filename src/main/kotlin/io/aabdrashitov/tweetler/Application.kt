@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@Suppress("unused")
 fun Application.module() {
     install(ContentNegotiation) {
         jackson {
@@ -20,13 +19,13 @@ fun Application.module() {
         }
     }
     routing {
-        get("/feed") {
+        post("/get-feed") {
             call.respond(dependencies.mainHandler.getFeed(call.receive()))
         }
-        get("/home") {
+        post("/get-home") {
             call.respond(dependencies.mainHandler.getHome(call.receive()))
         }
-        post("/post") {
+        post("/create-post") {
             call.respond(dependencies.mainHandler.post(call.receive()))
         }
         post("/follow") {

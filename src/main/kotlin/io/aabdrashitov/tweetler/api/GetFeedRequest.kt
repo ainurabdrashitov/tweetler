@@ -1,5 +1,7 @@
 package io.aabdrashitov.tweetler.api
 
+import java.util.*
+
 data class GetFeedRequest(
-    val userId: String?
+    val userId: UUID
 )
