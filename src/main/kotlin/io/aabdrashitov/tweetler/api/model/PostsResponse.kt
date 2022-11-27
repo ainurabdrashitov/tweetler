@@ -1,4 +1,4 @@
-package io.aabdrashitov.tweetler.api
+package io.aabdrashitov.tweetler.api.model
 
 import java.time.ZonedDateTime
 import java.util.UUID
@@ -9,6 +9,6 @@ data class PostsResponse(
 
 data class Post(
     val id: UUID,
-    val message: String,
+    val text: String,
     val date: ZonedDateTime
 )

@@ -1,6 +1,6 @@
 package io.aabdrashitov.tweetler
 
-import io.aabdrashitov.tweetler.api.*
+import io.aabdrashitov.tweetler.api.model.*
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers

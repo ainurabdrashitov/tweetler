@@ -1,4 +1,4 @@
-package io.aabdrashitov.tweetler.api
+package io.aabdrashitov.tweetler.api.model
 
 data class FollowResultResponse(
     val result: FollowResult
