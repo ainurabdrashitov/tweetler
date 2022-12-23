@@ -1,7 +1,8 @@
 package io.aabdrashitov.tweetler.api.handler
 
 import io.aabdrashitov.tweetler.api.model.*
-import io.aabdrashitov.tweetler.service.IPostService
+import io.aabdrashitov.tweetler.service.PostService
+import io.aabdrashitov.tweetler.service.model.User
 
 interface IMainHandler {
     fun getFeed(request: GetFeedRequest): PostsResponse
@@ -11,7 +12,7 @@ interface IMainHandler {
 }
 
 class MainHandlerImpl(
-    private val postService: IPostService
+    private val postService: PostService
 ) : IMainHandler {
 
     override fun getFeed(request: GetFeedRequest): PostsResponse {
@@ -23,6 +24,15 @@ class MainHandlerImpl(
     }
 
     override fun post(request: PostRequest): PostResultResponse {
+        postService.create(
+            post = Post(
+                id = null,
+                text = request.message,
+                date = request.date
+            ),
+            currentUser = User(id = request.authorId)
+        )
+        // TODO error handler?
         return PostResultResponse(PostResult.SUCCESS)
     }
 

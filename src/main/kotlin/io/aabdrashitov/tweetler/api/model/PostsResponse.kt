@@ -8,7 +8,7 @@ data class PostsResponse(
 )
 
 data class Post(
-    val id: UUID,
+    val id: UUID?,
     val text: String,
     val date: ZonedDateTime
 )

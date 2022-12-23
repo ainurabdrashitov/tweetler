@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class Post(
-    val id: UUID,
+    val id: UUID?,
     val text: String,
     val date: LocalDateTime,
-    val author: User
+    val author: UserIdentity
 )
