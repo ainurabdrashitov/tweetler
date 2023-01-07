@@ -2,10 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktorVersion = "2.1.3"
 val jacksonDatatypeVersion = "2.14.0"
-val logbackClassicVersion = "1.4.4"
+val logbackClassicVersion = "1.4.5"
 val assertjVersion = "3.23.1"
 val restAssuredVersion = "5.2.0"
 val junitVersion = "5.9.0"
+val liquibaseVersion = "4.16.0"
+val hikariVersion = "5.0.1"
+val postgresqlJdbcVersion = "42.5.1"
 
 plugins {
     kotlin("jvm") version "1.7.21"
@@ -26,6 +29,9 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDatatypeVersion")
     implementation("ch.qos.logback:logback-classic:$logbackClassicVersion")
+    implementation("org.liquibase:liquibase-core:$liquibaseVersion")
+    implementation("com.zaxxer:HikariCP:$hikariVersion")
+    implementation("org.postgresql:postgresql:$postgresqlJdbcVersion")
     testImplementation("org.assertj:assertj-core:$assertjVersion")
     testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
