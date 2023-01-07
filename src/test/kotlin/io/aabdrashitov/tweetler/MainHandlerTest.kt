@@ -40,7 +40,7 @@ class MainHandlerTest : BaseServerTest() {
 
     @Test
     fun testCreatePost() {
-        val request = PostRequest("Test message", ZonedDateTime.now())
+        val request = PostRequest(message = "Test message", date = ZonedDateTime.now(), authorId = UUID.randomUUID())
         val expected = PostResultResponse(PostResult.SUCCESS)
         RestAssured.given()
             .contentType(ContentType.JSON)

@@ -8,3 +8,7 @@ data class User(
     val displayName: String,
     val followers: List<User>
 )
+
+data class UserIdentity(
+    val id: UUID
+)
