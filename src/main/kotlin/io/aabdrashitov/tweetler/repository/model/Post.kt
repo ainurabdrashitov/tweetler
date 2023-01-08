@@ -1,11 +1,10 @@
 package io.aabdrashitov.tweetler.repository.model
 
 import java.time.LocalDateTime
-import java.util.*
 
 data class Post(
-    val id: UUID?,
+    val id: Long?,
     val text: String,
-    val date: LocalDateTime,
+    val datetime: LocalDateTime,
     val author: UserIdentity
 )

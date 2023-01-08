@@ -6,13 +6,12 @@ import io.restassured.http.ContentType
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
 import java.time.ZonedDateTime
-import java.util.*
 
 class MainHandlerTest : BaseServerTest() {
 
     @Test
     fun testGetFeed() {
-        val request = GetFeedRequest(UUID.randomUUID())
+        val request = GetFeedRequest(1)
         RestAssured.given()
             .contentType(ContentType.JSON)
             .bodyJson(request)
@@ -26,7 +25,7 @@ class MainHandlerTest : BaseServerTest() {
 
     @Test
     fun testGetHome() {
-        val request = GetHomeRequest(UUID.randomUUID())
+        val request = GetHomeRequest(2)
         RestAssured.given()
             .contentType(ContentType.JSON)
             .bodyJson(request)
@@ -40,7 +39,7 @@ class MainHandlerTest : BaseServerTest() {
 
     @Test
     fun testCreatePost() {
-        val request = PostRequest(message = "Test message", date = ZonedDateTime.now(), authorId = UUID.randomUUID())
+        val request = PostRequest(message = "Test message", date = ZonedDateTime.now(), authorId = 1)
         val expected = PostResultResponse(PostResult.SUCCESS)
         RestAssured.given()
             .contentType(ContentType.JSON)
@@ -55,7 +54,7 @@ class MainHandlerTest : BaseServerTest() {
 
     @Test
     fun testFollow() {
-        val request = FollowRequest(UUID.randomUUID(), UUID.randomUUID())
+        val request = FollowRequest(1, 2)
         val expected = FollowResultResponse(FollowResult.SUCCESS)
         RestAssured.given()
             .contentType(ContentType.JSON)

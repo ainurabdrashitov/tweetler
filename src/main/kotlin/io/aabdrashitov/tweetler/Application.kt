@@ -1,6 +1,9 @@
 package io.aabdrashitov.tweetler
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import io.aabdrashitov.tweetler.api.db.DBMigration
+import io.aabdrashitov.tweetler.configuration.Config
+import io.aabdrashitov.tweetler.configuration.ConnectionPoolConfig
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -12,6 +15,7 @@ import java.text.SimpleDateFormat
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
+    DBMigration(dependencies.connectionPool.dataSource).migrate()
     install(ContentNegotiation) {
         jackson {
             registerModule(JavaTimeModule())
@@ -34,4 +38,6 @@ fun Application.module() {
     }
 }
 
-private val dependencies = Dependencies()
+private val config = Config()
+private val connectionPoolConfig = ConnectionPoolConfig(config)
+private val dependencies = Dependencies(config, connectionPoolConfig)

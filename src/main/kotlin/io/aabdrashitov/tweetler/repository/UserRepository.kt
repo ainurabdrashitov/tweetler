@@ -1,15 +1,14 @@
 package io.aabdrashitov.tweetler.repository
 
 import io.aabdrashitov.tweetler.repository.model.User
-import java.util.*
 
 interface UserRepository {
-    fun findById(userId: UUID): User
+    fun findById(userId: Long): User
     fun update(user: User): User
 }
 
 class UserRepositoryImpl : UserRepository {
-    override fun findById(userId: UUID): User {
+    override fun findById(userId: Long): User {
         TODO("Not yet implemented")
     }
 

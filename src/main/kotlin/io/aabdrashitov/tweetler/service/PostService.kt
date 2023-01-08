@@ -6,21 +6,20 @@ import io.aabdrashitov.tweetler.repository.model.UserIdentity
 import io.aabdrashitov.tweetler.service.model.User
 import java.time.ZoneOffset.UTC
 import java.time.ZonedDateTime
-import java.util.*
 
 typealias DbPost = io.aabdrashitov.tweetler.repository.model.Post
 
 interface PostService {
-    fun feed(userId: UUID): List<Post>
-    fun home(userId: UUID): List<Post>
+    fun feed(userId: Long): List<Post>
+    fun home(userId: Long): List<Post>
     fun create(post: Post, currentUser: User)
 }
 
 class DummyPostServiceImpl : PostService {
-    override fun feed(userId: UUID): List<Post> {
+    override fun feed(userId: Long): List<Post> {
         return listOf(
             Post(
-                id = UUID.randomUUID(),
+                id = 1,
                 text = "Dummy message (external)",
                 date = ZonedDateTime.of(
                     2022,
@@ -36,10 +35,10 @@ class DummyPostServiceImpl : PostService {
         )
     }
 
-    override fun home(userId: UUID): List<Post> {
+    override fun home(userId: Long): List<Post> {
         return listOf(
             Post(
-                id = UUID.randomUUID(),
+                id = 2,
                 text = "Dummy message (my)",
                 date = ZonedDateTime.of(
                     2022,
@@ -59,22 +58,22 @@ class DummyPostServiceImpl : PostService {
 }
 
 class PostServiceImpl(private val postRepository: PostRepository) : PostService {
-    override fun feed(userId: UUID): List<Post> {
+    override fun feed(userId: Long): List<Post> {
         return postRepository.findAllFollowedUsersPosts(userId).map {
             Post(
                 id = it.id,
                 text = it.text,
-                date = ZonedDateTime.of(it.date, UTC)
+                date = ZonedDateTime.of(it.datetime, UTC)
             )
         }
     }
 
-    override fun home(userId: UUID): List<Post> {
+    override fun home(userId: Long): List<Post> {
         return postRepository.findAllByAuthorId(userId).map {
             Post(
                 id = it.id,
                 text = it.text,
-                date = ZonedDateTime.of(it.date, UTC)
+                date = ZonedDateTime.of(it.datetime, UTC)
             )
         }
     }
@@ -84,7 +83,7 @@ class PostServiceImpl(private val postRepository: PostRepository) : PostService 
             DbPost(
                 id = null,
                 text = post.text,
-                date = post.date.toLocalDateTime(), // TODO improve
+                datetime = post.date.toLocalDateTime(), // TODO improve
                 author = UserIdentity(id = currentUser.id)
             )
         )
